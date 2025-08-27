@@ -1,81 +1,80 @@
-# 🌍 PayStreet Mini Remittance Portal
+# 🌍 PayStreet — Mini Remittance Portal
 
 A full-stack assignment project that simulates a **cross-border payments platform**.  
-Built with **React + TailwindCSS + GSAP** on the frontend, and **Node.js + Express + MongoDB** on the backend.
+Frontend: **React + Vite + TailwindCSS + GSAP** • Backend: **Node.js + Express + MongoDB**
+
+---
+
+## 📑 Table of Contents
+
+- [🚀 Live Demo](#-live-demo)
+- [✨ Features](#-features)
+- [🎁 Bonus Features](#-bonus-features)
+- [🛠️ Tech Stack](#️-tech-stack)
+- [📂 Project Structure](#-project-structure)
+- [🧰 Setup & Run](#-setup--run)
+- [🧪 Tests](#-tests)
+- [🔐 Admin Access](#-admin-access)
+- [📸 Screenshots](#-screenshots)
+- [📡 API Endpoints (Preview)](#-api-endpoints-preview)
+- [🚢 Deployment Notes](#-deployment-notes)
+- [License](#license)
 
 ---
 
 ## 🚀 Live Demo
 
-👉 [Insert Deploy Link Here]
+👉 **Add your deployed link here:** `https://…`  
+_(Vercel/Render/Heroku are all fine.)_
 
 ---
 
 ## ✨ Features
 
-### Core
+### 1) User Onboarding & Authentication
 
-1. **User Onboarding & Authentication**
+- Signup/Login with **JWT**
+- Fields: **Full Name, Email, Password**
+- Account Number auto-generated (**UUID**)
+- Unique email validation
 
-   - Signup/Login with JWT authentication.
-   - Fields: Full Name, Email, Password.
-   - Account Number auto-generated (UUID).
-   - Unique email validation.
+### 2) Beneficiary Management
 
-2. **Beneficiary Management**
+- Add / Edit / Delete beneficiaries
+- Fields: **Name, Bank Account Number, Country, Currency**
+- Beneficiaries scoped to the logged-in user
 
-   - Add, edit, delete beneficiaries.
-   - Fields: Name, Bank Account Number, Country, Currency.
-   - Linked to the logged-in user.
+### 3) Money Transfer Workflow
 
-3. **Money Transfer Workflow**
+- Select beneficiary and enter **amount** in source currency
+- Live **FX conversion** to target currency
+- Show **fixed + percentage** fee and **total debit**
+- Confirm transaction (**mock execution**)
 
-   - Select beneficiary and enter amount in source currency.
-   - Fetch real-time FX conversion to target currency.
-   - Show fixed + percentage fee, total debit.
-   - Confirm transaction (mock execution).
+### 4) FX Rates Integration
 
-4. **FX Rates Integration**
+- Uses **ExchangeRate API** ([v6.exchangerate-api](https://v6.exchangerate-api.com/v6))
+- **15-min cache** layer to reduce calls
+- Graceful **error handling** / fallbacks
 
-   - Integrated with [ExchangeRate API](https://exchangerate.host).
-   - Caches rates for 15 minutes.
-   - Graceful error handling if API is down.
+### 5) Transaction History & Dashboard
 
-5. **Transaction History & Dashboard**
+- List of past transactions: **Date, Beneficiary, Amount, FX Rate, Fees, Status**
+- **Filter by date** and **Search by beneficiary**
 
-   - List of past transactions with details:
-     - Date, Beneficiary, Amount, FX Rate, Fees, Status.
-   - Filter by date range.
-   - Search by beneficiary name.
+### 6) Admin Panel
 
-6. **Admin Panel**
-   - Admin login (role-based access).
-   - Admin can view **all users** and **all transactions**.
-   - Transactions above $10,000 flagged as **High-Risk**.
-   - **Credentials for Admin Panel:**
-     ```
-     Email: rahul@admin.com
-     Password: 12345
-     ```
+- Role-based access for **Admin**
+- Admin can view **all users** and **all transactions**
+- Flags transactions **>$10,000** as **High-Risk**
 
 ---
 
 ## 🎁 Bonus Features
 
-- **Transaction Receipts**
-
-  - Downloadable **PDF** and **CSV** receipts per transaction.
-  - Bulk export CSV (user scope & admin scope).
-  - PDFs include sender/beneficiary info, FX details, fees, and QR code.
-
-- **Unit Tests**
-
-  - **Backend**: Auth, Transactions, Receipts API routes tested with Vitest + Supertest + in-memory Mongo.
-  - **Frontend**: Key components tested with Vitest + React Testing Library + JSDOM.
-
-- **GSAP Animations**
-  - Smooth entry animations for lists, cards, and dashboards.
-  - Micro-interactions for buttons and modals.
+- **Receipts**: Download **PDF** & **CSV** per transaction; bulk CSV export
+- **GSAP Animations**: Subtle motion for cards, lists, and modals
+- **Testing** (sample): Vitest + Supertest + React Testing Library
 
 ---
 
@@ -83,82 +82,154 @@ Built with **React + TailwindCSS + GSAP** on the frontend, and **Node.js + Expre
 
 **Frontend**
 
-- React + Vite
-- TailwindCSS
-- GSAP (animations)
-- Axios
+- React (Vite), TailwindCSS, GSAP, Axios
 
 **Backend**
 
-- Node.js + Express
-- MongoDB + Mongoose
-- JWT Authentication
-- PDFKit, json2csv, QRCode (for receipts)
+- Node.js, Express, MongoDB (Mongoose), JWT
+- PDFKit, json2csv, qrcode (for receipts)
 
 **Testing**
 
-- Vitest
-- Supertest
-- React Testing Library
-- JSDOM
+- Vitest, Supertest, React Testing Library, JSDOM
 
 ---
 
 ## 📂 Project Structure
 
+<img alt="Clear Folder Structure" src="./client/public/image.png" width="720" />
+
+```
 paystreet-mini/
-├── client/ # React frontend
-│ ├── node_modules/
-│ ├── public/
-│ ├── src/ # All frontend source code
-│ │ ├── pages/ # Dashboard, Transfer, Beneficiaries, Admin
-│ │ ├── components/ # Navbar, Routes, etc.
-│ │ └── api/ # Axios config, helpers
-│ ├── eslint.config.js
-│ ├── index.html
-│ ├── package.json
-│ ├── package-lock.json
-│ ├── vite.config.js
-│ └── README.md
+├── client/                         # React frontend
+│   ├── node_modules/
+│   ├── public/
+│   ├── src/                        # All frontend source code
+│   │   ├── pages/                  # Dashboard, Transfer, Beneficiaries, Admin
+│   │   ├── components/             # Navbar, routes, shared UI
+│   │   └── api/                    # Axios config, helpers
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── vite.config.js
+│   └── README.md
 │
-├── server/ # Node.js backend
-│ ├── config/ # App & DB configs
-│ ├── middleware/ # Auth, error handling
-│ ├── models/ # User, Beneficiary, Transaction
-│ ├── routes/ # Auth, Transactions, Admin, Receipts
-│ ├── services/ # FX rates, caching, business logic
-│ ├── tests/ # Basic unit/integration tests
-│ ├── utils/ # Utility helpers
-│ ├── node_modules/
-│ ├── app.js # Express app setup
-│ ├── server.js # Server entry point
-│ ├── package.json
-│ ├── package-lock.json
-│ └── .env
+├── server/                         # Node.js backend
+│   ├── config/                     # App & DB configs
+│   ├── middleware/                 # Auth, error handling
+│   ├── models/                     # User, Beneficiary, Transaction
+│   ├── routes/                     # Auth, Transactions, Admin, Receipts
+│   ├── services/                   # FX rates, caching, business logic
+│   ├── tests/                      # Unit/integration tests (sample)
+│   ├── utils/                      # Utility helpers
+│   ├── node_modules/
+│   ├── app.js                      # Express app setup
+│   ├── server.js                   # Server entry
+│   ├── package.json
+│   ├── package-lock.json
+│   └── .env
 │
 ├── .gitignore
 └── README.md
+```
 
-## 🧪 Running Tests
+---
 
-**Backend**
-cd server
-npm run test
+## 🧰 Setup & Run
 
-**Frontend**
-cd client
-npm run test
+> **Requirements:** Node 18+, MongoDB URI, npm
 
-🚀 Getting Started
-Backend
+### 1) Backend
+
+```bash
 cd server
 npm install
+cp .env.example .env   # if provided, otherwise create .env as below
 npm run dev
-Create .env with:
+```
+
+Create `.env` in `/server`:
+
+```bash
+PORT=5000
 MONGO_URI=<your-mongo-uri>
 JWT_SECRET=<your-secret>
+EXCHANGE_API_KEY=<your-api-key>
+FX_BASE_URL=https://v6.exchangerate-api.com/v6
+FX_CACHE_TTL_MINUTES=15
+FIXED_FEE=2.00
+PERCENT_FEE=0.5
+# Optional: EXTERNAL_FX_BASE_URL=https://api.exchangerate.host
+```
 
-Frontend
+### 2) Frontend
+
+```bash
 cd client
 npm install
 npm run dev
+```
+
+---
+
+## 🧪 Tests
+
+**Backend**
+
+```bash
+cd server
+npm run test
+```
+
+**Frontend**
+
+```bash
+cd client
+npm run test
+```
+
+---
+
+## 🔐 Admin Access
+
+Use these for the admin panel:
+
+```
+Email: rahul@admin.com
+Password: 12345
+```
+
+---
+
+## 📸 Screenshots
+
+### 🏠 User Dashboard
+
+![User Dashboard](./client/public/user.png)
+
+### ➕ Add Beneficiary
+
+![Beneficiary Page](./client/public/Beneficiary.png)
+
+### 💸 Make a Transfer
+
+![Transfer Page](./client/public/transfer.png)
+
+### 📜 Transaction History
+
+![History Page](./client/public/History.png)
+
+### 📂 Transaction Details
+
+![Transaction Page](./client/public/transcation.png)
+
+### 🔑 Admin Panel
+
+![Admin Panel](./client/public/admin.png)
+
+---
+
+## License
+
+MIT — feel free to use and modify for learning.
