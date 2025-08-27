@@ -6,30 +6,10 @@
       "use": "@vercel/static-build",
       "config": { "distDir": "dist" }
     },
-    {
-      "src": "server/server.js",
-      "use": "@vercel/node"
-    }
+    { "src": "server/server.js", "use": "@vercel/node" }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "server/server.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "client/dist/$1"
-    }
-  ],
-  "env": {
-    "PORT": "5000",
-    "MONGO_URI": "@mongo_uri",
-    "JWT_SECRET": "@jwt_secret",
-    "EXCHANGE_API_KEY": "@exchange_api_key",
-    "FX_BASE_URL": "https://v6.exchangerate-api.com/v6",
-    "FX_CACHE_TTL_MIN": "15",
-    "FIXED_FEE": "2.00",
-    "PERCENT_FEE": "0.5",
-    "VITE_API_BASE_URL": "/api"
-  }
+    { "src": "/api/(.*)", "dest": "server/server.js" },
+    { "src": "/(.*)", "dest": "client/dist/$1" }
+  ]
 }
