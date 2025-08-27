@@ -24,8 +24,7 @@ Frontend: **React + Vite + TailwindCSS + GSAP** • Backend: **Node.js + Express
 
 ## 🚀 Live Demo
 
-👉 **Add your deployed link here:** `https://…`  
-_(Vercel/Render/Heroku are all fine.)_
+👉 **Live App:** [https://mini-remittance-portal.vercel.app/](https://mini-remittance-portal.vercel.app/)
 
 ---
 
