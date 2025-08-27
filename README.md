@@ -55,7 +55,7 @@ Built with **React + TailwindCSS + GSAP** on the frontend, and **Node.js + Expre
    - **Credentials for Admin Panel:**
      ```
      Email: rahul@admin.com
-     Password: 12345..
+     Password: 12345
      ```
 
 ---
@@ -138,8 +138,6 @@ paystreet-mini/
 │
 ├── .gitignore
 └── README.md
-
----
 
 ## 🧪 Running Tests
 
